@@ -2,7 +2,7 @@
   :name "de-mock-racy"
   :version "0.0.0"
   :author "Marek Kochanowicz"
-  :depends-on ()
+  :depends-on (#:alexandria)
   :serial T
   :pathname "source"
   :components ((:file "package")

@@ -8,6 +8,7 @@
    #:*mock-controller*
    #:content
    #:execute-mockable-block
+   #:filter
    #:filter-closure
    #:find-waiting-call
    #:implementation-closure
