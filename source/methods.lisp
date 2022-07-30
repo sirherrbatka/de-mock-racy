@@ -25,7 +25,7 @@
                                   label
                                   arguments
                                   thunk)
-  (funcall (filter waiting-call) mock-controller label arguments thunk))
+  (funcall (filter-closure waiting-call) mock-controller label arguments thunk))
 
 
 (defmethod find-waiting-call ((waiting-calls basic-waiting-calls)

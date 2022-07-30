@@ -4,9 +4,11 @@
    #:basic-mock-controller
    #:basic-waiting-call
    #:basic-waiting-calls
+   #:mockable-block
+   #:*mock-controller*
    #:content
    #:execute-mockable-block
-   #:filter
+   #:filter-closure
    #:find-waiting-call
    #:implementation-closure
    #:usage-count

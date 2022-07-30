@@ -4,11 +4,11 @@
 (defclass basic-waiting-call ()
   ((%implementation-closure :initarg :implementation-closure
                             :reader implementation-closure)
-   (%filter :initarg :filter
-            :reader filter)
+   (%filter-closure :initarg :filter-closure
+                    :reader filter-closure)
    (%usage-count :initarg :usage-count
                  :accessor usage-count))
-  (:default-initargs :filter (constantly t)
+  (:default-initargs :filter-closure (constantly t)
                      :usage-count 1))
 
 

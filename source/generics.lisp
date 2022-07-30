@@ -12,6 +12,6 @@
 (defgeneric waiting-calls-enque (waiting-calls &rest arguments))
 
 (defgeneric waiting-call-class (basic-waiting-calls))
-(defgeneric filter (waiting-call))
+(defgeneric filter-closure (waiting-call))
 (defgeneric usage-count (waiting-call))
 (defgeneric (setf usage-count) (new-value waiting-call))
