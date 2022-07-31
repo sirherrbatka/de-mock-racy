@@ -20,6 +20,8 @@
    #:no-mock-implementation-error
    #:no-mock-implementation-error-arguments
    #:no-mock-implementation-error-label
+   #:waiting-calls-enque-many
+   #:waiting-calls-enque-many*
    #:waiting-call-accept-p
    #:waiting-call-class
    #:waiting-call-invoke

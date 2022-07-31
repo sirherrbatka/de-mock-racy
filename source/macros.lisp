@@ -41,3 +41,8 @@
        (destructuring-bind ,arguments ,!arguments
          (declare (ignorable ,@arguments))
          ,@body))))
+
+
+(defmacro waiting-calls-enque-many (waiting-calls &body body)
+  `(waiting-calls-enque-many* ,waiting-calls
+                              ,@(mapcar (lambda (args) `(list ,@args)) body)))

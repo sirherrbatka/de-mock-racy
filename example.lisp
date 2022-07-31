@@ -125,6 +125,32 @@ Called main function, now calling the mockable-block...
 Called mock implementation 2 with arguments 1, 2
 |#
 
+;; instead of calling WAITING-CALLS-ENQUE multiple times you can use WAITING-CALLS-ENQUE-MANY macro or WAITING-CALLS-ENQUE-MANY* function (check macroexpansion of WAITING-CALLS-ENQUE-MANY, it is trivial).
+
+(let* ((waiting-calls (make-instance 'de-mock-racy:basic-waiting-calls))
+       (de-mock-racy:*mock-controller* (make-instance 'de-mock-racy:basic-mock-controller
+                                                      :waiting-calls waiting-calls)))
+  (de-mock-racy:waiting-calls-enque-many waiting-calls
+    (:filter (de-mock-racy:filter example-implementation (a b)
+               (= a 1) (= b 2))
+        :implementation (de-mock-racy:implementation (a b)
+                          (format t "Called mock implementation 1 with arguments ~a, ~a~%" a b)))
+    (:filter (de-mock-racy:filter example-implementation (a b)
+               (= a 1) (= b 2))
+        :implementation (de-mock-racy:implementation (a b)
+                          (format t "Called mock implementation 2 with arguments ~a, ~a~%" a b))))
+  (example-function)
+  (example-function)
+  (unless (de-mock-racy:waiting-calls-every-used-up-p waiting-calls)
+    (format t "All of the waiting-calls used up.~%")))
+
+#|
+Called main function, now calling the mockable-block...
+Called mock implementation 1 with arguments 1, 2
+Called main function, now calling the mockable-block...
+Called mock implementation 2 with arguments 1, 2
+|#
+
 ;; let's subclass basic-mock-controller to implement shared mock implementation
 
 (defclass application-specific-mock-controller (de-mock-racy:basic-mock-controller)
@@ -140,8 +166,7 @@ Called mock implementation 2 with arguments 1, 2
   (de-mock-racy:waiting-calls-enque waiting-calls
                                     :usage-count 1
                                     :filter (de-mock-racy:filter example-implementation (a b)
-                                              (= a 1)
-                                              (= b 2))
+                                              (= a 1) (= b 2))
                                     :implementation (de-mock-racy:implementation (a b)
                                                       (format t "Called mock implementation with arguments ~a, ~a~%" a b)))
   (example-function 3 4) ; misses filter
