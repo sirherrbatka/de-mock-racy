@@ -13,8 +13,8 @@
                                            arguments
                                            thunk)
   (let* ((waiting-calls (waiting-calls mock-controller))
-         (waiting-call (waiting-calls-search-matching waiting-calls mock-controller
-                                                      label arguments)))
+         (waiting-call (waiting-calls-find-matching waiting-calls mock-controller
+                                                    label arguments)))
     (if (null waiting-call)
         (call-next-method)
         (waiting-call-invoke waiting-call mock-controller label arguments thunk))))
@@ -27,7 +27,7 @@
   (funcall (filter-closure waiting-call) mock-controller label arguments))
 
 
-(defmethod waiting-calls-search-matching ((waiting-calls basic-waiting-calls)
+(defmethod waiting-calls-find-matching ((waiting-calls basic-waiting-calls)
                                           mock-controller
                                           label
                                           arguments)

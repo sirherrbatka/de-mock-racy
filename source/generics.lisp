@@ -5,7 +5,7 @@
 (defgeneric waiting-calls (mock-controller))
 (defgeneric implementation-closure (waiting-call))
 (defgeneric waiting-call-used-up-p (waiting-call))
-(defgeneric waiting-calls-search-matching (waiting-calls mock-controller label arguments))
+(defgeneric waiting-calls-find-matching (waiting-calls mock-controller label arguments))
 (defgeneric waiting-call-accept-p (waiting-call mock-controller label arguments))
 (defgeneric waiting-call-invoke (waiting-call mock-controller label arguments thunk))
 (defgeneric waiting-calls-enque (waiting-calls &rest arguments))

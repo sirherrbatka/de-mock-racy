@@ -10,7 +10,7 @@
    #:execute-mockable-block
    #:filter
    #:filter-closure
-   #:waiting-calls-search-matching
+   #:waiting-calls-find-matching
    #:waiting-calls-every-used-up-p
    #:implementation
    #:implementation-closure
