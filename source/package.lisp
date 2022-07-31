@@ -17,6 +17,7 @@
    #:mockable-block
    #:usage-count
    #:used-up-p
+   #:no-mock-implementation-error
    #:waiting-call-accept-p
    #:waiting-call-class
    #:waiting-call-invoke

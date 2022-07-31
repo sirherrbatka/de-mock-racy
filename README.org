@@ -1,0 +1,8 @@
+** de-mock-racy: CL library for mocking
+If you write unit tests, at all, you probably will need to also mock. This libary intends to make it reasonably easy. You just place (mocakble-block (label-of-block argument-1 argument2) (actual-implementation argument-1 argument-2)) in code and de-mock-racy provides you with the ability to replace (actual-implementation argument-1 argument-2) with something required for your unit test.
+
+* How to use it?
+Just read the example.lisp source code.
+
+* Can I extend it?
+You can. Check out generics.lisp file. WAITING-CALL-ACCEPT-P is for filter, WAITING-CALL-INVOKE for implementation. By default those simply call stored functions. You can often avoid subclassing by writing :filter and :implementation lambda forms manually, without FILTER and IMPLEMENTATION macros.

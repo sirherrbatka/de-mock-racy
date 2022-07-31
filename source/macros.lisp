@@ -25,7 +25,7 @@
   "Expands into a lambda form suitable as :implementation argument for the make-instance 'basic-waiting-call."
   (alexandria:with-gensyms (!waiting-call !mock-controller !label !arguments !thunk)
     `(lambda (,!waiting-call ,!mock-controller ,!label ,!arguments ,!thunk)
-       (declare (ignore ,!waiting-call ,!mock-controller ,!label ,!arguments ,!thunk))
+       (declare (ignore ,!waiting-call ,!mock-controller ,!label ,!thunk))
        (destructuring-bind ,arguments ,!arguments
          (declare (ignorable ,@arguments))
          ,@body))))
@@ -35,7 +35,7 @@
   "Defines execute-mockable-block method for a given mock-controller class and label."
   (alexandria:with-gensyms (!thunk !mock-controller !arguments !label)
     `(defmethod execute-mockable-block ((,!mock-controller ,mock-controller-class)
-                                        (,!label (eq ',label))
+                                        (,!label (eql ',label))
                                         ,!arguments
                                         ,!thunk)
        (destructuring-bind ,arguments ,!arguments

@@ -8,8 +8,7 @@
                     :reader filter-closure)
    (%usage-count :initarg :usage-count
                  :accessor usage-count))
-  (:default-initargs :filter-closure (constantly t)
-                     :usage-count 1))
+  (:default-initargs :usage-count 1))
 
 
 (defclass basic-waiting-calls ()
@@ -26,3 +25,11 @@
   ((%waiting-calls :initarg :waiting-calls
                    :reader waiting-calls))
   (:default-initargs :waiting-calls (make-instance 'basic-waiting-calls)))
+
+
+(define-condition no-mock-implementation-error (error)
+  ((%label :initarg :label
+           :reader no-mock-implementation-error-label))
+  (:report (lambda (object stream)
+             (format stream "No mock implementation for block with label ~a could be found."
+                     (no-mock-implementation-error-label object)))))
