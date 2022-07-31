@@ -8,4 +8,4 @@ Just read the example.lisp source code.
 You can. Check out generics.lisp file. WAITING-CALL-ACCEPT-P is for filter, WAITING-CALL-INVOKE for implementation. By default those simply call stored functions. You can often avoid subclassing by writing :filter and :implementation lambda forms manually, without FILTER and IMPLEMENTATION macros.
 
 * Limitations
-Well, in terms of performance this is not 0 overhead type of system. De-mock-racy pushes everything over generic function dispatch. Selecting waiting-call is also performed in a linear fashion (scan array) which may prove insufficient -- in theory at least. In practice, I don't think it is a significant issue.
+Well, in terms of performance this is not 0 overhead type of system. De-mock-racy pushes mockable-blocks over generic function dispatch. Selecting waiting-call is also performed in a linear fashion (scan array) which may prove insufficient -- in theory at least. I don't think it is a significant issue in practie.
