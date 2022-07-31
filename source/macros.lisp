@@ -2,6 +2,7 @@
 
 
 (defmacro mockable-block ((label &rest arguments) &body body)
+  "Defines block that can be later mocked-up."
   `(execute-mockable-block *mock-controller*
                            ',label
                            (list ,@arguments)
@@ -9,6 +10,7 @@
 
 
 (defmacro filter (label arguments &body body)
+  "Expands into a lambda form suitable as :filter argument for the make-instance 'basic-waiting-call. Each form in body is supposed to return non-nil in order for filter to accept form."
   (alexandria:with-gensyms (!waiting-call !mock-controller !label !arguments)
     `(lambda (,!waiting-call ,!mock-controller ,!label ,!arguments)
        (declare (ignore ,!waiting-call ,!mock-controller))
@@ -20,6 +22,7 @@
 
 
 (defmacro implementation (arguments &body body)
+  "Expands into a lambda form suitable as :implementation argument for the make-instance 'basic-waiting-call."
   (alexandria:with-gensyms (!waiting-call !mock-controller !label !arguments !thunk)
     `(lambda (,!waiting-call ,!mock-controller ,!label ,!arguments ,!thunk)
        (declare (ignore ,!waiting-call ,!mock-controller ,!label ,!arguments ,!thunk))
@@ -29,6 +32,7 @@
 
 
 (defmacro define-mock-method (label mock-controller-class arguments &body body)
+  "Defines execute-mockable-block method for a given mock-controller class and label."
   (alexandria:with-gensyms (!thunk !mock-controller !arguments !label)
     `(defmethod execute-mockable-block ((,!mock-controller ,mock-controller-class)
                                         (,!label (eq ',label))

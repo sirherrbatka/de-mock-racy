@@ -13,8 +13,8 @@
                                            arguments
                                            thunk)
   (let* ((waiting-calls (waiting-calls mock-controller))
-         (waiting-call (find-waiting-call waiting-calls mock-controller
-                                          label arguments)))
+         (waiting-call (waiting-calls-search-matching waiting-calls mock-controller
+                                                      label arguments)))
     (if (null waiting-call)
         (call-next-method)
         (waiting-call-invoke waiting-call mock-controller label arguments thunk))))
@@ -27,12 +27,12 @@
   (funcall (filter-closure waiting-call) mock-controller label arguments))
 
 
-(defmethod find-waiting-call ((waiting-calls basic-waiting-calls)
-                              mock-controller
-                              label
-                              arguments)
+(defmethod waiting-calls-search-matching ((waiting-calls basic-waiting-calls)
+                                          mock-controller
+                                          label
+                                          arguments)
   (find-if (lambda (waiting-call)
-             (and (not (used-up-p waiting-call))
+             (and (not (waiting-call-used-up-p waiting-call))
                   (waiting-call-accept-p waiting-call mock-controller label arguments)))
            (content waiting-calls)))
 
@@ -42,7 +42,7 @@
                                 label
                                 arguments
                                 thunk)
-  (assert (not (used-up-p waiting-call)))
+  (assert (not (waiting-call-used-up-p waiting-call)))
   (decf (usage-count waiting-call))
   (funcall (implementation-closure waiting-call) mock-controller label arguments thunk))
 
@@ -56,5 +56,9 @@
     waiting-calls))
 
 
-(defmethod used-up-p ((waiting-call basic-waiting-call))
+(defmethod waiting-call-used-up-p ((waiting-call basic-waiting-call))
   (<= (usage-count waiting-call) 0))
+
+
+(defmethod waiting-calls-every-used-up-p ((waiting-calls basic-waiting-calls))
+  (every #'waiting-call-used-up-p (content waiting-calls)))

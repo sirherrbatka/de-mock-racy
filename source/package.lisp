@@ -10,7 +10,8 @@
    #:execute-mockable-block
    #:filter
    #:filter-closure
-   #:find-waiting-call
+   #:waiting-calls-search-matching
+   #:waiting-calls-every-used-up-p
    #:implementation
    #:implementation-closure
    #:mockable-block
@@ -20,4 +21,5 @@
    #:waiting-call-class
    #:waiting-call-invoke
    #:waiting-calls
+   #:waiting-call-used-up-p
    #:waiting-calls-enque))
