@@ -2,9 +2,9 @@
 
 
 (defclass basic-waiting-call ()
-  ((%implementation-closure :initarg :implementation-closure
+  ((%implementation-closure :initarg :implementation
                             :reader implementation-closure)
-   (%filter-closure :initarg :filter-closure
+   (%filter-closure :initarg :filter
                     :reader filter-closure)
    (%usage-count :initarg :usage-count
                  :accessor usage-count))

@@ -5,6 +5,8 @@
    #:basic-waiting-call
    #:basic-waiting-calls
    #:mockable-block
+   #:implementation
+   #:define-mock-method
    #:*mock-controller*
    #:content
    #:execute-mockable-block
