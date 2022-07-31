@@ -49,9 +49,7 @@ All of the waiting-calls used up.
   (example-function)
   )
 
-#|
-The above will emit eror because by default each waiting call can be invoked only once. This can be corrected...
-|#
+;; The above will emit eror because by default each waiting call can be invoked only once. This can be corrected...
 
 (let* ((waiting-calls (make-instance 'de-mock-racy:basic-waiting-calls))
        (de-mock-racy:*mock-controller* (make-instance 'de-mock-racy:basic-mock-controller
@@ -98,6 +96,33 @@ Called mock implementation with arguments 1, 2
 Called main function, now calling the mockable-block...
 Called mock implementation with arguments 1, 2
 This will always print because usage-count is nil.
+|#
+
+;; you can enque multiple waiting-calls.
+
+(let* ((waiting-calls (make-instance 'de-mock-racy:basic-waiting-calls))
+       (de-mock-racy:*mock-controller* (make-instance 'de-mock-racy:basic-mock-controller
+                                                      :waiting-calls waiting-calls)))
+  (de-mock-racy:waiting-calls-enque waiting-calls
+                                    :filter (de-mock-racy:filter example-implementation (a b)
+                                              (= a 1) (= b 2))
+                                    :implementation (de-mock-racy:implementation (a b)
+                                                      (format t "Called mock implementation 1 with arguments ~a, ~a~%" a b)))
+  (de-mock-racy:waiting-calls-enque waiting-calls
+                                    :filter (de-mock-racy:filter example-implementation (a b)
+                                              (= a 1) (= b 2))
+                                    :implementation (de-mock-racy:implementation (a b)
+                                                      (format t "Called mock implementation 2 with arguments ~a, ~a~%" a b)))
+  (example-function)
+  (example-function)
+  (unless (de-mock-racy:waiting-calls-every-used-up-p waiting-calls)
+    (format t "All of the waiting-calls used up.~%")))
+
+#|
+Called main function, now calling the mockable-block...
+Called mock implementation 1 with arguments 1, 2
+Called main function, now calling the mockable-block...
+Called mock implementation 2 with arguments 1, 2
 |#
 
 ;; let's subclass basic-mock-controller to implement shared mock implementation
