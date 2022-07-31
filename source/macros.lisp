@@ -2,7 +2,7 @@
 
 
 (defmacro mockable-block ((label &rest arguments) &body body)
-  "Defines block that can be later mocked-up."
+  "Defines block that can be later mocked."
   `(execute-mockable-block *mock-controller*
                            ',label
                            (list ,@arguments)
