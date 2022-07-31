@@ -7,7 +7,7 @@
     `(let ((,!mock-controller *mock-controller*))
        (if (null ,!mock-controller)
            (progn ,@body)
-           (execute-mockable-block *mock-controller*
+           (execute-mockable-block ,!mock-controller
                                    ',label
                                    (list ,@arguments)
                                    (lambda () ,@body))))))
