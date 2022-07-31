@@ -13,6 +13,8 @@
 (defgeneric waiting-call-class (basic-waiting-calls))
 (defgeneric filter-closure (waiting-call))
 (defgeneric usage-count (waiting-call))
+(defgeneric usage-counter (waiting-call))
 (defgeneric (setf usage-count) (new-value waiting-call))
+(defgeneric (setf usage-counter) (new-value waiting-call))
 (defgeneric content (waiting-calls))
 (defgeneric implementation-closure (waiting-call))

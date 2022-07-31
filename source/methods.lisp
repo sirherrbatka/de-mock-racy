@@ -50,8 +50,7 @@
                                 arguments
                                 thunk)
   (assert (not (waiting-call-used-up-p waiting-call)))
-  (unless (null (usage-count waiting-call))
-    (decf (usage-count waiting-call)))
+  (incf (usage-counter waiting-call))
   (funcall (implementation-closure waiting-call) waiting-call mock-controller label arguments thunk))
 
 
@@ -66,7 +65,8 @@
 
 (defmethod waiting-call-used-up-p ((waiting-call basic-waiting-call))
   (and (not (null (usage-count waiting-call)))
-       (<= (usage-count waiting-call) 0)))
+       (< (usage-counter waiting-call)
+          (usage-count waiting-call))))
 
 
 (defmethod waiting-calls-every-used-up-p ((waiting-calls basic-waiting-calls))

@@ -7,7 +7,9 @@
    (%filter-closure :initarg :filter
                     :reader filter-closure)
    (%usage-count :initarg :usage-count
-                 :accessor usage-count))
+                 :accessor usage-count)
+   (%usage-counter :initform 0
+                   :accessor usage-counter))
   (:default-initargs :usage-count 1))
 
 

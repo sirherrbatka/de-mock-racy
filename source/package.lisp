@@ -16,12 +16,12 @@
    #:implementation-closure
    #:mockable-block
    #:usage-count
-   #:used-up-p
    #:no-mock-implementation-error
    #:no-mock-implementation-error-arguments
    #:no-mock-implementation-error-label
    #:waiting-calls-enque-many
    #:waiting-calls-enque-many*
+   #:usage-counter
    #:waiting-call-accept-p
    #:waiting-call-class
    #:waiting-call-invoke
