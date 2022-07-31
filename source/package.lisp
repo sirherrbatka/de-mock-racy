@@ -18,6 +18,8 @@
    #:usage-count
    #:used-up-p
    #:no-mock-implementation-error
+   #:no-mock-implementation-error-arguments
+   #:no-mock-implementation-error-label
    #:waiting-call-accept-p
    #:waiting-call-class
    #:waiting-call-invoke

@@ -29,7 +29,10 @@
 
 (define-condition no-mock-implementation-error (error)
   ((%label :initarg :label
-           :reader no-mock-implementation-error-label))
+           :reader no-mock-implementation-error-label)
+   (%arguments :initarg :arguments
+               :reader no-mock-implementation-error-arguments))
   (:report (lambda (object stream)
-             (format stream "No mock implementation for block with label ~a could be found."
-                     (no-mock-implementation-error-label object)))))
+             (format stream "No mock implementation for block with label ~a and arguments ~{~a ~}could be found."
+                     (no-mock-implementation-error-label object)
+                     (no-mock-implementation-error-arguments object)))))

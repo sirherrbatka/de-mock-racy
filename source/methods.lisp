@@ -12,7 +12,7 @@
                                    label
                                    arguments
                                    thunk)
-  (error 'no-mock-implementation-error :label label))
+  (error 'no-mock-implementation-error :label label :arguments arguments))
 
 
 (defmethod execute-mockable-block :around ((mock-controller basic-mock-controller)
