@@ -151,6 +151,7 @@ Called mock implementation 2 with arguments 1, 2
     (format t "All used up again.")))
 
 #|
+Called main function, now calling the mockable-block...
 This is a handy if you need to mock a shared default behavior. It can be still shadowed by waiting-call.
 Oh, btw: arguments a: 3, b: 4.
 Called main function, now calling the mockable-block...
