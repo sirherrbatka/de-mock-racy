@@ -3,10 +3,14 @@
 
 (defmacro mockable-block ((label &rest arguments) &body body)
   "Defines block that can be later mocked."
-  `(execute-mockable-block *mock-controller*
-                           ',label
-                           (list ,@arguments)
-                           (lambda () ,@body)))
+  (alexandria:with-gensyms (!mock-controller)
+    `(let ((,!mock-controller *mock-controller*))
+       (if (null ,!mock-controller)
+           (progn ,@body)
+           (execute-mockable-block *mock-controller*
+                                   ',label
+                                   (list ,@arguments)
+                                   (lambda () ,@body))))))
 
 
 (defmacro filter (label arguments &body body)
