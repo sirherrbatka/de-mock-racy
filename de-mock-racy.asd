@@ -1,5 +1,7 @@
 (asdf:defsystem #:de-mock-racy
   :name "de-mock-racy"
+  :license "BSD simplified"
+  :description "Simplistic mocking library."
   :version "0.0.0"
   :author "Marek Kochanowicz"
   :depends-on (#:alexandria)
