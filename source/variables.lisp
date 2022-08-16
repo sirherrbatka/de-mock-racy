@@ -2,3 +2,4 @@
 
 
 (defvar *mock-controller* nil)
+(defvar *thunk*)

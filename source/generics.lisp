@@ -1,7 +1,7 @@
 (cl:in-package #:de-mock-racy)
 
 
-(defgeneric execute-mockable-block (mock-controller label arguments thunk))
+(defgeneric execute-mockable-block* (mock-controller label arguments thunk))
 (defgeneric waiting-calls (mock-controller))
 (defgeneric waiting-call-used-up-p (waiting-call))
 (defgeneric waiting-calls-find-matching (waiting-calls mock-controller label arguments))

@@ -2,11 +2,14 @@
   (:use #:cl)
   (:export
    #:*mock-controller*
+   #:*thunk*
+   #:call-thunk
    #:basic-mock-controller
    #:basic-waiting-call
    #:basic-waiting-calls
    #:content
    #:define-mock-method
+   #:execute-mockable-block*
    #:execute-mockable-block
    #:filter
    #:filter-closure

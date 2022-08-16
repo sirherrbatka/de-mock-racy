@@ -38,10 +38,10 @@
 (defmacro define-mock-method (label mock-controller-class arguments &body body)
   "Defines execute-mockable-block method for a given mock-controller class and label."
   (alexandria:with-gensyms (!thunk !mock-controller !arguments !label)
-    `(defmethod execute-mockable-block ((,!mock-controller ,mock-controller-class)
-                                        (,!label (eql ',label))
-                                        ,!arguments
-                                        ,!thunk)
+    `(defmethod execute-mockable-block* ((,!mock-controller ,mock-controller-class)
+                                         (,!label (eql ',label))
+                                         ,!arguments
+                                         ,!thunk)
        (destructuring-bind ,arguments ,!arguments
          (declare (ignorable ,@arguments))
          ,@body))))

@@ -1,24 +1,24 @@
 (cl:in-package #:de-mock-racy)
 
 
-(defmethod execute-mockable-block ((mock-controller (eql nil))
-                                   label
-                                   arguments
-                                   thunk)
+(defmethod execute-mockable-block* ((mock-controller (eql nil))
+                                    label
+                                    arguments
+                                    thunk)
   (funcall thunk))
 
 
-(defmethod execute-mockable-block ((mock-controller basic-mock-controller)
+(defmethod execute-mockable-block* ((mock-controller basic-mock-controller)
                                    label
                                    arguments
                                    thunk)
   (error 'no-mock-implementation-error :label label :arguments arguments))
 
 
-(defmethod execute-mockable-block :around ((mock-controller basic-mock-controller)
-                                           label
-                                           arguments
-                                           thunk)
+(defmethod execute-mockable-block* :around ((mock-controller basic-mock-controller)
+                                            label
+                                            arguments
+                                            thunk)
   (let* ((waiting-calls (waiting-calls mock-controller))
          (waiting-call (waiting-calls-find-matching waiting-calls mock-controller
                                                     label arguments)))
