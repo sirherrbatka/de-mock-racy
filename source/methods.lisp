@@ -64,8 +64,9 @@
 
 
 (defmethod waiting-call-used-up-p ((waiting-call basic-waiting-call))
-  (and (not (null (usage-count waiting-call)))
-       (< (usage-counter waiting-call)
+  (if (null (usage-count waiting-call))
+      nil
+      (>= (usage-counter waiting-call)
           (usage-count waiting-call))))
 
 
