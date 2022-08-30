@@ -35,6 +35,6 @@
    (%arguments :initarg :arguments
                :reader no-mock-implementation-error-arguments))
   (:report (lambda (object stream)
-             (format stream "No mock implementation for block with label ~a and arguments ~{~a ~}could be found."
+             (format stream "No mock implementation for block with label ~S and arguments ~{~a ~}could be found."
                      (no-mock-implementation-error-label object)
                      (no-mock-implementation-error-arguments object)))))
